@@ -36,3 +36,6 @@ jobs:
 
       - name: Push image
         run: docker push arielbosano/hello-joker:${{ env.IMAGE_TAG }}
+
+      - name: Set image as latest
+        run: docker tag arielbosano/hello-joker:${{ env.IMAGE_TAG }} arielbosano/hello-joker:latest && docker push arielbosano/hello-joker:latest
