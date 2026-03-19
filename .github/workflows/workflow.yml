@@ -4,7 +4,8 @@ on:
     branchs: [main, develop]
 
 env:
-  IMAGE_TAG: ${{ substring(github.sha, 0, 6) }}
+#   Set image tag as the first 6 characters of the commit SHA for uniqueness
+  IMAGE_TAG: ${{ github.sha }}
 
 jobs:
   test:
@@ -31,7 +32,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build image
-        run: docker build . -t arielbosano/hello-joker:${GITHUB_SHA::6}
+        run: docker build . -t arielbosano/hello-joker:${{ env.IMAGE_TAG }}
 
       - name: Push image
-        run: docker push arielbosano/hello-joker:${GITHUB_SHA::6}
+        run: docker push arielbosano/hello-joker:${{ env.IMAGE_TAG }}
