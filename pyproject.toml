@@ -1,0 +1,61 @@
+[project]
+name = "machine-learning-platform-engineering"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "duckdb>=1.5.0",
+    "fastapi>=0.135.1",
+    "ipykernel>=7.2.0",
+    "minio>=7.2.20",
+    "optuna>=4.7.0",
+    "pyjokes>=0.8.3",
+    "starlette-exporter>=0.23.0",
+    "uvicorn>=0.41.0",
+]
+
+[dependency-groups]
+analysis = [
+    "kaleido>=1.2.0",
+    "matplotlib>=3.10.8",
+    "plotly>=6.6.0",
+    "plotnine>=0.15.3",
+    "seaborn>=0.13.2",
+]
+ml = [
+    "jupyterlab>=4.5.6",
+    "pandas>=2.3.3",
+    "pytest>=9.0.2",
+    "scikit-learn>=1.7.2",
+    "xgboost>=3.2.0",
+    "mlflow>=3.10.1",
+]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+addopts = [
+    "-v",
+    "--strict-markers",
+    "--tb=short",
+    "-ra",
+]
+
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests (deselect with '-m \"not integration\"')",
+    "unit: marks tests as unit tests (deselect with '-m \"not unit\"')",
+    "database: marks tests that require a database (deselect with '-m \"not database\"')",
+]
+
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+    "ignore::UserWarning",
+    "ignore::FutureWarning",
+]
