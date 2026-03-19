@@ -4,7 +4,7 @@ on:
     branchs: [main, develop]
 
 env:
-  IMAGE_TAG: ${{ github.sha }}
+  IMAGE_TAG: ${{ substring(github.sha, 0, 6) }}
 
 jobs:
   test:
@@ -31,7 +31,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build image
-        run: docker build . -t arielbosano/hello-joker:${{ env.IMAGE_TAG }}
+        run: docker build . -t arielbosano/hello-joker:${GITHUB_SHA::6}
 
       - name: Push image
-        run: docker push arielbosano/hello-joker:${{ env.IMAGE_TAG }}
+        run: docker push arielbosano/hello-joker:${GITHUB_SHA::6}
